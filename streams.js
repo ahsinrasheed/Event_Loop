@@ -15,6 +15,7 @@ server.on('request', (req, res) => {
     
     // Solution 2 : Streams
 
+    /*
     const readable = fs.createReadStream('./test-file.txt');
     readable.on('data', chunk => {
         res.write(chunk);
@@ -27,7 +28,12 @@ server.on('request', (req, res) => {
         res.statusCode = 500;
         res.end('File not Found!');
     });
-    
+    */
+    // Solution 3
+    const readable = fs.createReadStream('./test-file.txt');
+    readable.pipe(res);
+    // readableSource.pipe(writeableDest);
+
 });
 server.listen(3000, '127.0.0.1', () => {
     console.log('Listening...')
